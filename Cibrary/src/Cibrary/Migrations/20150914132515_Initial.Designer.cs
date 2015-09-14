@@ -9,9 +9,14 @@ using Microsoft.Data.Entity.SqlServer.Metadata;
 namespace Cibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        public override string Id
+        {
+            get { return "20150914132515_Initial"; }
+        }
+
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Annotation("ProductVersion", "7.0.0-beta7-15540")
@@ -67,54 +72,6 @@ namespace Cibrary.Migrations
                         .Annotation("Relational:Name", "UserNameIndex");
 
                     b.Annotation("Relational:TableName", "AspNetUsers");
-                });
-
-            modelBuilder.Entity("Cibrary.Models.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Author");
-
-                    b.Property<int>("CategoryId");
-
-                    b.Property<int>("CountAvailable");
-
-                    b.Property<string>("ISBN");
-
-                    b.Property<string>("Title");
-
-                    b.Property<int>("TotalCount");
-
-                    b.Property<DateTime>("Year");
-
-                    b.Key("Id");
-                });
-
-            modelBuilder.Entity("Cibrary.Models.Borrow", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BookId");
-
-                    b.Property<DateTime?>("EndTime");
-
-                    b.Property<DateTime>("StartTime");
-
-                    b.Property<string>("UserId");
-
-                    b.Key("Id");
-                });
-
-            modelBuilder.Entity("Cibrary.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CategoryName");
-
-                    b.Key("Id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
@@ -194,24 +151,6 @@ namespace Cibrary.Migrations
                     b.Key("UserId", "RoleId");
 
                     b.Annotation("Relational:TableName", "AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Cibrary.Models.Book", b =>
-                {
-                    b.Reference("Cibrary.Models.Category")
-                        .InverseCollection()
-                        .ForeignKey("CategoryId");
-                });
-
-            modelBuilder.Entity("Cibrary.Models.Borrow", b =>
-                {
-                    b.Reference("Cibrary.Models.Book")
-                        .InverseCollection()
-                        .ForeignKey("BookId");
-
-                    b.Reference("Cibrary.Models.ApplicationUser")
-                        .InverseCollection()
-                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>

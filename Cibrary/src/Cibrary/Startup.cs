@@ -19,9 +19,9 @@ using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
-using Microsoft.Framework.Runtime;
 using Cibrary.Models;
 using Cibrary.Services;
+using Microsoft.Dnx.Runtime;
 
 namespace Cibrary
 {
@@ -91,6 +91,7 @@ namespace Cibrary
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.ApplicationServices.GetService<ApplicationDbContext>().Database.Migrate();
             loggerFactory.MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole();
 
